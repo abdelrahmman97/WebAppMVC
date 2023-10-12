@@ -1,0 +1,101 @@
+﻿<header class="navbar sticky-top bg-body-tertiary border-bottom flex-md-nowrap p-0 p-3 " data-bs-theme="light">
+    <div class="d-flex flex-row align-items-center">
+        <button class="nav-link px-3 text-black d-flex d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+    </div>
+
+    <div class="dropdown d-flex flex-row align-items-center">
+        <button class="nav-link px-3 text-black d-flex d-md-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSearch" aria-controls="navbarSearch" aria-expanded="false" aria-label="Toggle search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+
+        <div class="d-none d-md-flex align-items-center">
+            <form class="w-100 me-3" role="search">
+                <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
+            </form>
+        </div>
+
+        <button class="btn border-0 py-2 dropdown-toggle d-flex align-items-center gap-2" id="bd-theme" type="button" aria-expanded="false" data-bs-toggle="dropdown" aria-label="Toggle theme (light)">
+            <i class="fa-solid fa-palette"></i>
+            <span class="visually-hidden" id="bd-theme-text">Toggle theme</span>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bd-theme-text" style="">
+            <li>
+                <button type="button" class="dropdown-item d-flex align-items-center gap-2 active" data-bs-theme-value="light" aria-pressed="true">
+                    <i class="fa-solid fa-sun"></i>
+                    Light
+                </button>
+            </li>
+            <li>
+                <button type="button" class="dropdown-item d-flex align-items-center gap-2" data-bs-theme-value="dark" aria-pressed="false">
+                    <i class="fa-solid fa-moon"></i>
+                    Dark
+                </button>
+            </li>
+            <li>
+                <button type="button" class="dropdown-item d-flex align-items-center gap-2" data-bs-theme-value="auto" aria-pressed="false">
+                    <i class="fa-solid fa-circle-half-stroke"></i>
+                    Auto
+                </button>
+            </li>
+        </ul>
+
+    </div>
+
+    <div id="navbarSearch" class="navbar-search w-100 collapse">
+        <input class="form-control w-100 rounded-0 border-0" type="text" placeholder="Search" aria-label="Search">
+    </div>
+
+</header>
+<div class="offcanvas offcanvas-start" tabindex="-1" id="sidebarMenu" aria-labelledby="offcanvasLabel">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasLabel">
+            <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6 text-black" href="#">Dashboard</a>
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <ul class="flex-column gap-2 nav nav-pills">
+            <li class="nav-item">
+                <a class="nav-link d-flex align-items-center gap-2 text-black @(ViewContext.RouteData.Values["Controller"].ToString().ToLower() == "home" ? "active text-white" : "")" aria-current="page" href="Home/Index">
+                    <i class="fa-solid fa-table-columns"></i>
+                    Dashboard
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link d-flex align-items-center gap-2 text-black @(ViewContext.RouteData.Values["Controller"].ToString().ToLower() == "category" ? "active text-white" : "")" href="Category/Index">
+                    <i class="fa-solid fa-list"></i>
+                    Categories
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link d-flex align-items-center gap-2 text-black @(ViewContext.RouteData.Values["Controller"].ToString().ToLower() == "product" ? "active text-white" : "")" href="Product/Index">
+                    <i class="fa-solid fa-boxes-stacked"></i>
+                    Products
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link d-flex align-items-center gap-2 text-black @(ViewContext.RouteData.Values["Controller"].ToString().ToLower() == "customer" ? "active text-white" : "")" href="#">
+                    <i class="fa-solid fa-users"></i>
+                    Customers
+                </a>
+            </li>
+        </ul>
+
+        <ul class="nav flex-column mt-auto">
+            <li class="nav-item">
+                <a class="nav-link d-flex align-items-center gap-2 text-black" href="#">
+                    <i class="fa-solid fa-gear"></i>
+                    Settings
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link d-flex align-items-center gap-2 text-black" href="#">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    Sign out
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
