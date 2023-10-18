@@ -4,15 +4,29 @@
 
 @{
     ViewData["Title"] = "Products";
+    var categories = ViewData["Categories"] as List<SelectListItem>;
 }
 
-<h1>Index</h1>
 <div class="d-flex flex-row justify-content-between align-items-center">
     <h1>Products</h1>
-
     <p>
-        <a class="btn btn-primary" aria-controller="Category" asp-action="Create">Create New</a>
+        <a class="btn btn-primary" asp-controller="product" asp-action="create">Create New</a>
     </p>
+</div>
+
+<div class="card p-2 my-4">
+    @*    @{
+    await Html.RenderPartialAsync("_SearchProduct.cshtml", categories);
+    }*@
+    <form asp-action="Search" asp-controller="Product" asp-route-PageSize="6" method="get">
+        <h4>Search Products</h4>
+        <div class="d-flex flex-row gap-3 my-3">
+            <input class="form-control" name="Name" type="text" placeholder="Name" />
+            <input class="form-control" name="Price" type="number" value="0" placeholder="Price" />
+            <select class="form-control" name="CategoryID" asp-items="@categories"></select>
+        </div>
+        <button class="btn btn-primary float-end" type="submit">Search</button>
+    </form>
 </div>
 
 <table class="table">
@@ -37,14 +51,18 @@
         </tr>
     </thead>
     <tbody>
-        @foreach(ProductVeiwModel item in Model)
+        @foreach (ProductVeiwModel item in Model)
         {
             <tr>
                 <td>
-                    @item.Name
+                    <div class="d-inline-block text-truncate" style="max-width:10rem">
+                        @item.Name
+                    </div>
                 </td>
                 <td>
-                    @item.Description
+                    <div class="d-inline-block text-truncate" style="max-width: 20rem">
+                        @item.Description
+                    </div>
                 </td>
                 <td>
                     @item.Price

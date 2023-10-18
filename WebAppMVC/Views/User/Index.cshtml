@@ -1,0 +1,36 @@
+﻿@using AppRepository.Models;
+@model IEnumerable<UserSignUpViewModel>
+
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+	<h5>Users</h5>
+</div>
+
+
+<table class="table">
+	<thead>
+		<tr>
+			<th scope="col">@Html.DisplayNameFor(model => model.UserName)</th>
+			<th scope="col">@Html.DisplayNameFor(model => model.Email)</th>
+			<th scope="col">@Html.DisplayNameFor(model => model.Role)</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@{
+			foreach (var user in Model)
+			{
+				<tr>
+					<td>@user.UserName</td>
+					<td>@user.Email</td>
+					<td>@user.Role</td>
+					<td>
+						<div class="d-flex flex-row gap-2">
+							<a class="btn btn-primary" asp-controller="user" asp-action="EditRoles" asp-route-id="@user.Id">Manage Role</a>
+						</div>
+					</td>
+				</tr>
+			}
+		}
+	</tbody>
+</table>

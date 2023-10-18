@@ -1,0 +1,67 @@
+﻿@using AppRepository.Models;
+@using Models;
+@model UserRolesViewModel;
+@{
+    var UserName = ViewData["UserName"] as string;
+}
+
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h5>Add role to @UserName</h5>
+    <a class="btn btn-primary" asp-controller="user" asp-action="index">Back to list</a>
+</div>
+
+@if (ViewBag.Success == 1)
+{
+    <div class="alert alert-success" role="alert">
+        <p>Roles updated successfully</p>
+    </div>
+}
+else if (ViewBag.Success == 2)
+{
+    <div class="alert alert-danger" role="alert">
+        <p>Unknown Error happend</p>
+    </div>
+}
+
+<div class="card">
+    <div class="card-body">
+        <form asp-controller="user" asp-action="UpdateRoles" method="post">
+            <input asp-for="@Model.UserId" type="hidden" />
+            <table class="table" id="userRolesTable">
+                <thead>
+                    <tr>
+                        <th>
+                            Role
+                        </th>
+                        <th>
+                            Status
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < Model.UserRoles.Count(); i++)
+                    {
+                        <tr>
+                            <td>
+                                <input asp-for="@Model.UserRoles[i].Name" type="hidden" />
+                                @Model.UserRoles[i].Name
+                            </td>
+                            <td>
+                                <div class="form-check m-1">
+                                    <input asp-for="@Model.UserRoles[i].Selected" class="form-check-input" />
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div class="col-sm-12">
+                <button type="submit" id="save" class="btn btn-primary">
+                    Save
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+

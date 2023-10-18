@@ -1,0 +1,68 @@
+﻿﻿@using AppRepository.Models;
+@model PaginationViewModel<List<ProductVeiwModel>>;
+
+@{
+    var categories = ViewData["Categories"] as List<SelectListItem>;
+    bool movenext = true;
+    bool moveback = true;
+}
+
+<div class="card p-2 my-4">
+    @*    @{
+    await Html.RenderPartialAsync("_SearchProduct.cshtml", categories);
+    }*@
+    <form asp-action="Search" asp-controller="Product" asp-route-PageSize="6" method="get">
+        <h4>Search Products</h4>
+        <div class="d-flex flex-row gap-3 my-3">
+            <input class="form-control" name="Name" type="text" placeholder="Name" />
+            <input class="form-control" name="Price" type="number" value="0" placeholder="Price" />
+            <select class="form-control" name="CategoryID">
+                @*<option value="-1" selected>select category</option>*@
+                @foreach(var item in categories)
+                {
+                    <option value="@item.Value">@item.Text</option>
+                }
+            </select>
+        </div>
+        <div class="d-flex flex-row justify-content-between">
+            <p class="lead">number of resualts @(Model.Count) products </p>
+            <button class="btn btn-primary float-end" type="submit">Search</button>
+        </div>
+    </form>
+
+</div>
+
+@*<p class="lead">from @(((Model.PageIndex - 1) * Model.PageSize) + 1) to @((Model.PageIndex) * Model.PageSize) of @(Model.Count) </p>*@
+
+<div class="row">
+    @foreach (ProductVeiwModel item in Model.Data)
+    {
+        <div class="col-4 p-2">
+            <div class="card">
+                @if (@item.Images.Count == 0)
+                {
+                    <p>No Images Provided</p>
+                }
+                else
+                {
+                    <img src="/Images/@item.Images.FirstOrDefault()" class="card-img-top" alt="...">
+                }
+                <div class="card-body">
+                    <h5 class="card-title">@item.Name</h5>
+                    <div class="d-flex flex-row justify-content-between">
+                        <p class="card-text badge bg-info">$ @item.Price</p>
+                        <p class="card-text badge bg-secondary">@item.CategoryName</p>
+                    </div>
+                    <a asp-controller="product" asp-action="details" asp-route-id="@item.ID" class="btn btn-primary">Details</a>
+                    <a asp-controller="product" asp-action="edit" asp-route-id="@item.ID" class="btn btn-secondary">Edit</a>
+                    <a asp-controller="product" asp-action="delete" asp-route-id="@item.ID" class="btn btn-danger">Delete</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<div class="d-flex flex-row align-items-center gap-3">
+    <a class="btn btn-primary" asp-action="Search" asp-controller="Product" asp-route-PageSize="6" asp-route-PageIndex="@(Model.PageIndex-1)" disabled="@moveback">Back</a>
+    <p class="lead">Page @Model.PageIndex </p>
+    <a class="btn btn-primary" asp-action="Search" asp-controller="Product" asp-route-PageSize="6" asp-route-PageIndex="@(Model.PageIndex+1)" disabled="@movenext">Next</a>
+</div>

@@ -1,9 +1,11 @@
 ﻿using AppRepository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Models;
 
 namespace WebAppMVC.Controllers
 {
+    [Authorize]
     public class CategoryController : Controller
     {
         CategoryRepo _categoryRepo;

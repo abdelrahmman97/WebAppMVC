@@ -3,22 +3,23 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Web App MVC</title>
+    <title>E-Commerce - @ViewBag.Title</title>
 
     <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css" />
+    <link rel="stylesheet" href="/Style.css" />
 
 </head>
 <body>
 
     <main class="container-fluid p-0">
         <div class="d-flex">
-            <div class="col-md-3 d-none d-md-flex flex-column p-0 position-fixed h-100">
+            <div class="col-md-2 d-none d-md-flex flex-column p-0 position-fixed h-100">
                 @{
                     await Html.RenderPartialAsync("_SideNav.cshtml");
                 }
             </div>
-            <div class="col-md-9 col-sm-12 p-0 ms-auto">
+            <div class="col-md-10 col-sm-12 p-0 ms-auto">
                 @{
                     await Html.RenderPartialAsync("_NavBar.cshtml");
                 }

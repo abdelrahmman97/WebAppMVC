@@ -1,43 +1,49 @@
 ﻿<div class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary border-end h-100">
 
-    <a class="navbar-brand text-black mt-2 mb-3 fs-4" href="#">Dashboard</a>
+    <a class="navbar-brand text-black mt-2 mb-3 fs-4" asp-controller="Home" asp-action="#">Dashboard</a>
 
     <ul class="flex-column gap-2 nav nav-pills">
         <li class="nav-item">
-            <a class="nav-link d-flex align-items-center gap-2 text-black @(ViewContext.RouteData.Values["Controller"].ToString().ToLower() == "home" ? "active text-white" : "")" aria-current="page" href="Home/Index">
+            <a class="nav-link d-flex align-items-center gap-2 text-black @(ViewContext.RouteData.Values["Controller"].ToString().ToLower() == "home" ? "active text-white" : "")" aria-current="page" asp-controller="Home" asp-action="Index">
                 <i class="fa-solid fa-table-columns"></i>
                 Dashboard
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link d-flex align-items-center gap-2 text-black @(ViewContext.RouteData.Values["Controller"].ToString().ToLower() == "category" ? "active text-white" : "")" href="Category/Index">
+            <a class="nav-link d-flex align-items-center gap-2 text-black @(ViewContext.RouteData.Values["Controller"].ToString().ToLower() == "category" ? "active text-white" : "")" asp-controller="Category" asp-action="Index">
                 <i class="fa-solid fa-list"></i>
                 Categories
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link d-flex align-items-center gap-2 text-black @(ViewContext.RouteData.Values["Controller"].ToString().ToLower() == "product" ? "active text-white" : "")" href="Product/Index">
+            <a class="nav-link d-flex align-items-center gap-2 text-black @(ViewContext.RouteData.Values["Controller"].ToString().ToLower() == "product" ? "active text-white" : "")" asp-controller="Product" asp-action="Index">
                 <i class="fa-solid fa-boxes-stacked"></i>
                 Products
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link d-flex align-items-center gap-2 text-black @(ViewContext.RouteData.Values["Controller"].ToString().ToLower() == "customer" ? "active text-white" : "")" href="#">
+            <a class="nav-link d-flex align-items-center gap-2 text-black @(ViewContext.RouteData.Values["Controller"].ToString().ToLower() == "role" ? "active text-white" : "")" asp-controller="role" asp-action="index">
+                <i class="fa-solid fa-user-shield"></i>
+                Roles
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link d-flex align-items-center gap-2 text-black @(ViewContext.RouteData.Values["Controller"].ToString().ToLower() == "customer" ? "active text-white" : "")" asp-controller="user" asp-action="index">
                 <i class="fa-solid fa-users"></i>
-                Customers
+                Users
             </a>
         </li>
     </ul>
 
     <ul class="nav flex-column mt-auto">
         <li class="nav-item">
-            <a class="nav-link d-flex align-items-center gap-2 text-black" href="#">
+            <a class="nav-link d-flex align-items-center gap-2 text-black" asp-controller="Home" asp-action="#">
                 <i class="fa-solid fa-gear"></i>
                 Settings
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link d-flex align-items-center gap-2 text-black" href="#">
+            <a class="nav-link d-flex align-items-center gap-2 text-black" asp-controller="Home" asp-action="#">
                 <i class="fa-solid fa-right-from-bracket"></i>
                 Sign out
             </a>

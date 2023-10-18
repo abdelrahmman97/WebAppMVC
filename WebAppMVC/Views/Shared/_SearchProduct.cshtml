@@ -1,0 +1,8 @@
+﻿
+<form asp-action="Search" asp-controller="Product" asp-route-PageSize="6" method="get">
+    <h4>Search Products</h4>
+    <input class="form-control" name="Name" type="text" placeholder="Name" />
+    <input class="form-control" name="Price" type="number" value="0" placeholder="Price" />
+    <select class="form-control" name="CategoryID" asp-items="@Model.categories"></select>
+    <button class="btn btn-info" type="submit">Search</button>
+</form>

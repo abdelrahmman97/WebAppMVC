@@ -22,7 +22,7 @@ namespace WebAppMVC.Controllers
 
         public IActionResult Index()
         {
-            ViewData["Categories"] = _categoryRepo.GetList().Select(i => i.Name).ToList();
+            ViewData["Categories"] = GetCateogries();
             List<ProductVeiwModel> products = _productRepo.List().ToList();
             return View(products);
         }
@@ -87,13 +87,22 @@ namespace WebAppMVC.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            ViewData["Categories"] = _categoryRepo.GetList().ToList();
+            ViewData["Categories"] = GetCateogries();
             ProductVeiwModel product = _productRepo.GetProductByID(id);
-            return View(product);
+            AddProductViewModel edit = new AddProductViewModel();
+            edit.ID = product.ID;
+            edit.Name = product.Name;
+            edit.Description = product.Description;
+            edit.Price = product.Price;
+            edit.Quantity = product.Quantity;
+            edit.CategoryID = product.CategoryId;
+            edit.ImagesURLs = product.Images;
+
+            return View(edit);
         }
 
         [HttpPost]
-        public IActionResult Edit(ProductVeiwModel product)
+        public IActionResult Edit(AddProductViewModel product)
         {
             Product _new = new Product();
 
@@ -102,11 +111,29 @@ namespace WebAppMVC.Controllers
             _new.Price = product.Price;
             _new.Quantity = product.Quantity;
             _new.Description = product.Description;
-            _new.CategoryID = product.CategoryId;
+            _new.CategoryID = product.CategoryID;
 
             _productRepo.Edit(_new, product.ID);
             _unitOfWork.Commit();
             return RedirectToAction("Index");
+        }
+
+        public IActionResult Search
+            (
+            int ID = 0,
+            string Name = null,
+            string CategoryName = null,
+            int CategoryID = 0,
+            double Price = 0,
+            string OrderBy = "Price",
+            bool IsAscending = false,
+            int PageSize = 6,
+            int PageIndex = 1
+            )
+        {
+            ViewData["Categories"] = GetCateogries();
+            var res = _productRepo.Search(Name, CategoryName, CategoryID, ID, Price, OrderBy, IsAscending, PageSize, PageIndex);
+            return View(res);
         }
 
         private List<SelectListItem> GetCateogries()

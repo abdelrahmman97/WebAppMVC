@@ -1,8 +1,30 @@
-﻿<header class="navbar sticky-top bg-body-tertiary border-bottom flex-md-nowrap p-0 p-3 " data-bs-theme="light">
+﻿<header class="navbar sticky-top bg-body-tertiary border-bottom flex-md-nowrap p-0 p-3 align-items-center" data-bs-theme="light">
     <div class="d-flex flex-row align-items-center">
         <button class="nav-link px-3 text-black d-flex d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
             <i class="fa-solid fa-bars"></i>
         </button>
+        @if (User.Identity.Name != null)
+        {
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb breadcrumb-chevron p-3 m-0 bg-body-tertiary rounded-3">
+                    <li class="breadcrumb-item">
+                        <a class="link-body-emphasis" asp-controller="home" asp-action="index">
+                            <i class="fa-solid fa-house"></i>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a class="link-body-emphasis fw-semibold text-decoration-none"
+                           asp-controller="@ViewContext.RouteData.Values["Controller"].ToString()"
+                           asp-action="index">
+                            @ViewContext.RouteData.Values["Controller"].ToString()
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">
+                        @ViewContext.RouteData.Values["action"].ToString()
+                    </li>
+                </ol>
+            </nav>
+        }
     </div>
 
     <div class="dropdown d-flex flex-row align-items-center">
@@ -15,6 +37,52 @@
                 <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
             </form>
         </div>
+
+        @if (User.Identity.Name == null)
+        {
+            <ul class="flex-row gap-2 nav nav-pills">
+                <li class="nav-item">
+                    <a class="nav-link d-flex align-items-center gap-2 text-black" asp-controller="Account" asp-action="SignUp">
+                        Sign Up
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link d-flex align-items-center gap-2 text-black" asp-controller="Account" asp-action="SignIn">
+                        Sign In
+                    </a>
+                </li>
+            </ul>
+        }
+        else
+        {
+            <button class="btn border-0 py-2 dropdown-toggle d-flex align-items-center gap-2" id="bd-User" type="button" aria-expanded="false" data-bs-toggle="dropdown" aria-label="">
+                <i class="fa-solid fa-user"></i>
+                @User.Identity.Name
+                <span class="visually-hidden" id="bd-theme-text">@User.Identity.Name</span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bd-theme-text" style="">
+                <li>
+                    <a class="dropdown-item d-flex align-items-center gap-2">
+                        <i class="fa-solid fa-gear"></i>
+                        Settings
+                    </a>
+                </li>
+                <li>
+                    <a class="dropdown-item d-flex align-items-center gap-2" asp-controller="account" asp-action="changepassword">
+                        <i class="fa-solid fa-gear"></i>
+                        Change Password
+                    </a>
+                </li>
+                <li><hr class="dropdown-divider"></li>
+                <li>
+                    <a class="dropdown-item dropdown-item-danger d-flex gap-2 align-items-center gap-2" asp-controller="Account" asp-action="SignOut">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                        Logout
+                    </a>
+                </li>
+            </ul>
+
+        }
 
         <button class="btn border-0 py-2 dropdown-toggle d-flex align-items-center gap-2" id="bd-theme" type="button" aria-expanded="false" data-bs-toggle="dropdown" aria-label="Toggle theme (light)">
             <i class="fa-solid fa-palette"></i>

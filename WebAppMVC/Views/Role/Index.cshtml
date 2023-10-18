@@ -1,0 +1,65 @@
+@using Models;
+@model RoleViewModel;
+@{
+	var roles = ViewData["Roles"] as List<RoleViewModel>;
+	ViewData["Title"] = "Index";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+	<h5>Roles</h5>
+</div>
+
+@if(ViewBag.Success == 1)
+{
+	<div class="alert alert-success" role="alert">
+		<p>Role added successfully</p>
+	</div>
+}
+else if (ViewBag.Success == 2)
+{
+	<div class="alert alert-danger" role="alert">
+		<p>Unknown Error happend</p>
+	</div>
+}
+
+<div class="card">
+	<div class="card-body">
+		<form asp-controller="role" asp-action="index" method="post">
+			<div class="d-flex justify-content-between align-items-center">
+				<div class="mb-3">
+				  <label asp-for="Name"></label>
+				  <input class="form-control" asp-for="Name">
+				  <span asp-validation-for="Name" class="text-danger"></span>
+				</div>
+				<input type="submit" class="btn btn-primary" value="Add">
+			</div>
+		</form>
+	</div>
+</div>
+
+<table class="table">
+	<thead>
+		<tr>
+			<th scope="col">@Html.DisplayNameFor(model => model.Id)</th>
+			<th scope="col">@Html.DisplayNameFor(model => model.Name)</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+	@{
+		foreach(var role in roles){
+			<tr>
+				<td>@role.Id</td>
+				<td>@role.Name</td>
+				<td>
+					<div class="d-flex flex-row gap-2">
+						<a class="btn btn-primary" asp-controller="Category" asp-action="Edit" asp-route-id="@role.Id">Edit</a>
+						<a class="btn btn-secondary" asp-controller="Category" asp-action="Details" asp-route-id="@role.Id">Details</a>
+						<a class="btn btn-danger" asp-controller="Category" asp-action="Delete" asp-route-id="@role.Id">Delete</a>
+					</div>
+				</td>
+			</tr>
+		}
+	}
+	</tbody>
+</table>

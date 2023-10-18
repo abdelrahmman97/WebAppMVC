@@ -1,4 +1,4 @@
-﻿@using Models;
+﻿
 @model WebAppMVC.AddProductViewModel
 
 @{
@@ -6,46 +6,45 @@
     List<SelectListItem> Categories = ViewData["Categories"] as List<SelectListItem>;
 }
 
-<h1>Edit</h1>
 
-<h4>Product</h4>
+<h4>Edit Product</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="ID" />
-            <div class="form-group">
-                <label asp-for="CategoryID" class="control-label"></label>
+            <div class="form-group mb-3">
+                <label asp-for="CategoryID" class="control-label mb-1">Category</label>
                 <select asp-for="CategoryID" class="form-control" asp-items="Categories"></select>
                 <span asp-validation-for="CategoryID" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
+            <div class="form-group mb-3">
+                <label asp-for="Name" class="control-label mb-1"></label>
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
+            <div class="form-group mb-3">
+                <label asp-for="Description" class="control-label mb-1"></label>
                 <input asp-for="Description" class="form-control" />
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Price" class="control-label"></label>
+            <div class="form-group mb-3">
+                <label asp-for="Price" class="control-label mb-1"></label>
                 <input asp-for="Price" class="form-control" />
                 <span asp-validation-for="Price" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Quantity" class="control-label"></label>
+            <div class="form-group mb-3">
+                <label asp-for="Quantity" class="control-label mb-1"></label>
                 <input asp-for="Quantity" class="form-control" />
                 <span asp-validation-for="Quantity" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Images" class="control-label"></label>
+            <div class="form-group mb-3">
+                <label asp-for="Images" class="control-label mb-1"></label>
                 <input asp-for="Images" class="form-control" />
                 <span asp-validation-for="Images" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group mb-3">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
@@ -56,8 +55,8 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
-@section Scripts {
+@*@section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
-}
+}*@

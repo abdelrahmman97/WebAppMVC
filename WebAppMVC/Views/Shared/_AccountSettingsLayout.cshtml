@@ -1,0 +1,60 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>E-Commerce - @ViewBag.Title</title>
+
+    <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css" />
+    <link rel="stylesheet" href="/Style.css" />
+</head>
+<body>
+    <div class="contanier mx-auto">
+        @{
+            await Html.RenderPartialAsync("_NavBar");
+        }
+        <div class="row">
+            <div class="col-2">
+                <ul class="nav nav-pills p-0">
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="account" asp-action="profile">
+                            <i class="fa-solid fa-user"></i>
+                            Profile
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="account" asp-action="email">
+                            <i class="fa-solid fa-at"></i>
+                            Email
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="account" asp-action="password">
+                            <i class="fa-solid fa-lock"></i>
+                            Password
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="account" asp-action="Preferences">
+                            <i class="fa-solid fa-gear"></i>
+                            Preferences
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="account" asp-action="deleteAccount">
+                            <i class="fa-solid fa-trash-can"></i>
+                            Delete Account
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-10">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+
+    <script src="/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

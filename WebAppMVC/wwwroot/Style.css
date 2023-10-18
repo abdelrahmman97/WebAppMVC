@@ -1,2 +1,4 @@
-﻿body {
+﻿.dropdown-item-danger:hover, .dropdown-item-danger:focus {
+    color: #fff;
+    background-color: var(--bs-red);
 }

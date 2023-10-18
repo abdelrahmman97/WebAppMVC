@@ -12,8 +12,7 @@ namespace AppRepository.Models
             {
                 productAttachments.Add(new ProductAttachment()
                 {
-                    ImageUrl = item,
-                    ProductID = product.ID
+                    ImageUrl = item
                 });
             }
             return new Product
@@ -60,6 +59,19 @@ namespace AppRepository.Models
                 CategoryId = product.CategoryID,
                 CategoryName = product.Category.Name,
                 Images = product.ProductAttachments.Select(x => x.ImageUrl).ToList(),
+            };
+        }
+        public static AddProductViewModel ToVeiwModel(this ProductVeiwModel product)
+        {
+            return new AddProductViewModel
+            {
+                ID = product.ID,
+                Name = product.Name,
+                Price = product.Price,
+                Description = product.Description,
+                Quantity = product.Quantity,
+                CategoryID = product.CategoryId,
+                ImagesURLs = product.Images,
             };
         }
     }
